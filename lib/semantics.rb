@@ -1,4 +1,5 @@
-require "semantics/version"
+require 'httparty'
+require './lib/semantics/content_project'
 
 module Semantics
   TOKEN = ENV['TOKEN'] || raise('No Token')
