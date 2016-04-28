@@ -1,5 +1,6 @@
 require 'httparty'
 require './lib/semantics/content_project'
+require './lib/semantics/thing'
 
 module Semantics
   TOKEN = ENV['TOKEN'] || raise('No Token')
