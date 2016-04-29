@@ -11,7 +11,7 @@ module Semantics
     end
 
     def self.find(cp_id, obj_id)
-      endpoint = "https://api.ax-semantics.com/v1/content-project/#{cp_id}/thing/#{obj_id}"
+      endpoint = "https://api.ax-semantics.com/v1/content-project/#{cp_id}/thing/#{obj_id}/"
       options = { headers: headers }
       attributes = get(endpoint, options)
       new(attributes)
@@ -22,7 +22,7 @@ module Semantics
       options = {
         headers: headers,
         body: {
-          uid: Time.now.to_s,
+          uid: uid,
           name: name,
           content_project: cp_id,
           pure_data: pure_data
@@ -30,6 +30,27 @@ module Semantics
       }
       attributes = post(endpoint, options)
       new(attributes)
+    end
+
+    def self.update(cp_id, obj_id, uid, name, pure_data)
+      endpoint = "https://api.ax-semantics.com/v1/content-project/#{cp_id}/thing/#{obj_id}/"
+      options = {
+        headers: headers,
+        body: {
+          uid: uid,
+          name: name,
+          content_project: cp_id,
+          pure_data: pure_data
+        }.to_json
+      }
+      attributes = put(endpoint, options)
+      new(attributes)
+    end
+
+    def self.destroy(cp_id, obj_id)
+      endpoint = "https://api.ax-semantics.com/v1/content-project/#{cp_id}/thing/#{obj_id}/"
+      options = { headers: headers }
+      delete(endpoint, options)
     end
 
     def self.headers
