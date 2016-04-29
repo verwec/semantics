@@ -16,19 +16,19 @@ module Semantics
       new(attributes)
     end
 
-    def self.headers
-      {
-        "Content-Type" => "application/json",
-        "Authorization" => TOKEN
-      }
-    end
-
     def self.create(name, engine_configuration)
       endpoint = "https://api.ax-semantics.com/v1/content-project/"
       # TODO: don't use string concatenation
       options = { headers: headers, body: '{ "name": "' + name + '", "engine_configuration": "' + engine_configuration.to_s + '" }' }
       attributes = post(endpoint, options)
       new(attributes)
+    end
+
+    def self.headers
+      {
+        "Content-Type" => "application/json",
+        "Authorization" => TOKEN
+      }
     end
   end
 end
