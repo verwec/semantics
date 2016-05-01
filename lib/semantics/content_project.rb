@@ -2,11 +2,17 @@ module Semantics
   class ContentProject
     include HTTParty
 
-    attr_reader :id, :name
+    attr_reader :id, :name, :axcompany_name, :engine_configuration, :count_things,
+      :count_generated_texts, :thing_type
 
     def initialize(attributes)
       @id = attributes["id"]
       @name = attributes["name"]
+      @axcompany_name = attributes["axcompany_name"]
+      @engine_configuration = attributes["engine_configuration"]
+      @count_things = attributes["count_things"]
+      @count_generated_texts = attributes["count_generated_texts"]
+      @thing_type = attributes["thing_type"]
     end
 
     def self.find(cp_id)
