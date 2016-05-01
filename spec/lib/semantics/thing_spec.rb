@@ -2,13 +2,26 @@ require 'spec_helper'
 
 describe Semantics::Thing do
   describe '#find' do
-    it 'returns a thing' do
+
+    let(:cp_id) { 4591 }
+    let(:obj_id) { 28653 }
+    let(:thing) do
       VCR.use_cassette('get_thing') do
-        cp_id = 4591
-        obj_id = 28653
-        thing = Semantics::Thing.find(cp_id, obj_id)
-        expect(thing.generated_text).to include 'Wer ist "Sparda-Bank Hamburg"?'
+        Semantics::Thing.find(cp_id, obj_id)
       end
+    end
+    subject { thing }
+
+    describe 'the found thing' do
+      its('generated_text') { is_expected.to include "Wer ist" }
+      its('status') { is_expected.to eq "success" }
+      its('created') { is_expected.to be }
+      its('modified') { is_expected.to be }
+      its('uid') { is_expected.to eq '214' }
+      its('name') { is_expected.to eq 'value2' }
+      its('text_as_html') { is_expected.to include 'Wer ist' }
+      its('pure_data') { is_expected.to eq({"name"=>"name"}) }
+      its('content_project') { is_expected.to eq 4591 }
     end
   end
 
