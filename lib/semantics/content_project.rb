@@ -16,16 +16,21 @@ module Semantics
     end
 
     def self.find(cp_id)
-      endpoint = "https://api.ax-semantics.com/v1/content-project/#{cp_id}/"
+      endpoint = "#{API_URI}/content-project/#{cp_id}/"
       options = { headers: headers }
       attributes = get(endpoint, options)
       new(attributes)
     end
 
     def self.create(name, engine_configuration)
-      endpoint = "https://api.ax-semantics.com/v1/content-project/"
-      # TODO: don't use string concatenation
-      options = { headers: headers, body: '{ "name": "' + name + '", "engine_configuration": "' + engine_configuration.to_s + '" }' }
+      endpoint = "#{API_URI}/content-project/"
+      options = {
+        headers: headers,
+        body: {
+          name: name,
+          engine_configuration: engine_configuration
+        }.to_json
+      }
       attributes = post(endpoint, options)
       new(attributes)
     end
