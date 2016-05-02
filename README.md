@@ -19,10 +19,43 @@ And then execute:
 Or install it yourself as:
 
     $ gem install semantics
+    
+    
+Create a .env file containing your API TOKEN
+
+``` TOKEN <YOUR API TOKEN>```
 
 ## Usage
 
-TODO: Write usage instructions here
+### Content Projects
+
+Create a new content project
+
+``` Semantics::ContentProject.create(name_of_the_project, engine_configuration) ```
+
+Find a content project
+
+``` Semantics::ContentProject.find(content_project_id) ```
+
+### Objects (Things)
+
+Create a new thing
+
+``` Semantics::Thing.create(content_project_id, uid, name, pure_date) ```
+
+Find a thing
+
+```  Semantics::Thing.find(content_project_id, uid) ``` 
+
+Update a thing
+
+``` Semantics::Thing.update(content_project_id, object_id, uid, name, pure_date) ``` 
+
+Delete a thing 
+
+``` Semantics::Thing.destroy(content_project_id, object_id) ```
+
+
 
 ## Development
 
