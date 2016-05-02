@@ -2,6 +2,8 @@ module Semantics
   class Thing
     include HTTParty
 
+    base_uri BASE_URI
+
     attr_reader :id, :generated_text, :status, :created, :modified, :uid,
       :description, :name, :url, :text_as_html, :pure_data, :content_project, :name
 
@@ -22,14 +24,14 @@ module Semantics
     end
 
     def self.find(cp_id, obj_id)
-      endpoint = "#{API_URI}/content-project/#{cp_id}/thing/#{obj_id}/"
+      endpoint = "/content-project/#{cp_id}/thing/#{obj_id}/"
       options = { headers: headers }
       attributes = get(endpoint, options)
       new(attributes)
     end
 
     def self.create(cp_id, uid, name, pure_data)
-      endpoint = "#{API_URI}/content-project/#{cp_id}/thing/"
+      endpoint = "/content-project/#{cp_id}/thing/"
       options = {
         headers: headers,
         body: {
@@ -44,7 +46,7 @@ module Semantics
     end
 
     def self.update(cp_id, obj_id, uid, name, pure_data)
-      endpoint = "#{API_URI}/content-project/#{cp_id}/thing/#{obj_id}/"
+      endpoint = "/content-project/#{cp_id}/thing/#{obj_id}/"
       options = {
         headers: headers,
         body: {
@@ -59,7 +61,7 @@ module Semantics
     end
 
     def self.destroy(cp_id, obj_id)
-      endpoint = "#{API_URI}/content-project/#{cp_id}/thing/#{obj_id}/"
+      endpoint = "/content-project/#{cp_id}/thing/#{obj_id}/"
       options = { headers: headers }
       delete(endpoint, options)
     end

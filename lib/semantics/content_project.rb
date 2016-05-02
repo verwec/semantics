@@ -2,6 +2,8 @@ module Semantics
   class ContentProject
     include HTTParty
 
+    base_uri BASE_URI
+
     attr_reader :id, :name, :axcompany_name, :engine_configuration, :count_things,
       :count_generated_texts, :thing_type
 
@@ -16,14 +18,14 @@ module Semantics
     end
 
     def self.find(cp_id)
-      endpoint = "#{API_URI}/content-project/#{cp_id}/"
+      endpoint = "/content-project/#{cp_id}/"
       options = { headers: headers }
       attributes = get(endpoint, options)
       new(attributes)
     end
 
     def self.create(name, engine_configuration)
-      endpoint = "#{API_URI}/content-project/"
+      endpoint = "/content-project/"
       options = {
         headers: headers,
         body: {

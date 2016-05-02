@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe Semantics::Thing do
+  let(:cp_id) { 4748 }
+
   describe '#find' do
 
-    let(:cp_id) { 4591 }
-    let(:obj_id) { 28653 }
+    let(:obj_id) { 93685 }
     let(:thing) do
       VCR.use_cassette('get_thing') do
         Semantics::Thing.find(cp_id, obj_id)
@@ -13,22 +14,19 @@ describe Semantics::Thing do
     subject { thing }
 
     describe 'the found thing' do
-      its('generated_text') { is_expected.to include "Wer ist" }
-      its('status') { is_expected.to eq "success" }
+      its('status') { is_expected.to eq "not requested" }
       its('created') { is_expected.to be }
       its('modified') { is_expected.to be }
-      its('uid') { is_expected.to eq '214' }
-      its('name') { is_expected.to eq 'value2' }
-      its('text_as_html') { is_expected.to include 'Wer ist' }
-      its('pure_data') { is_expected.to eq({"name"=>"name"}) }
-      its('content_project') { is_expected.to eq 4591 }
+      its('uid') { is_expected.to be }
+      its('name') { is_expected.to eq 'foobar' }
+      its('pure_data') { is_expected.to eq({"key"=>"value"}) }
+      its('content_project') { is_expected.to eq cp_id }
     end
   end
 
   describe '#create' do
     it 'creates a thing' do
       VCR.use_cassette('create_thing') do
-        cp_id = 4591
         uid = Time.now.to_s
         name = 'foobar'
         pure_date = { key: 'value' }
