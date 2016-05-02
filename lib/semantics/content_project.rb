@@ -21,6 +21,7 @@ module Semantics
       endpoint = "/content-project/#{cp_id}/"
       options = { headers: headers }
       attributes = get(endpoint, options)
+      raise ApiError.new(attributes) unless attributes.response.code == '200'
       new(attributes)
     end
 
@@ -34,6 +35,7 @@ module Semantics
         }.to_json
       }
       attributes = post(endpoint, options)
+      raise ApiError.new(attributes) unless attributes.response.code == '200'
       new(attributes)
     end
 

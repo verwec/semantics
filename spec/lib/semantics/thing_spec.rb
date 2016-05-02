@@ -21,6 +21,12 @@ describe Semantics::Thing do
       its('pure_data') { is_expected.to eq('key' => 'value') }
       its('content_project') { is_expected.to eq cp_id }
     end
+
+    it 'throws an appropriated error' do
+      VCR.use_cassette('get_thing_error') do
+        expect { Semantics::Thing.find(1, nil) }.to raise_error Semantics::ApiError
+      end
+    end
   end
 
   describe '#create' do

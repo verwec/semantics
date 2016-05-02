@@ -28,6 +28,7 @@ module Semantics
       endpoint = "/content-project/#{cp_id}/thing/#{obj_id}/"
       options = { headers: headers }
       attributes = get(endpoint, options)
+      raise ApiError.new(attributes) unless attributes.response.code == '200'
       new(attributes)
     end
 
@@ -58,12 +59,14 @@ module Semantics
         }.to_json
       }
       attributes = put(endpoint, options)
+      raise ApiError.new(attributes) unless attributes.response.code == '200'
       new(attributes)
     end
 
     def self.destroy(cp_id, obj_id)
       endpoint = "/content-project/#{cp_id}/thing/#{obj_id}/"
       options = { headers: headers }
+      raise ApiError.new(attributes) unless attributes.response.code == '200'
       delete(endpoint, options)
     end
 
