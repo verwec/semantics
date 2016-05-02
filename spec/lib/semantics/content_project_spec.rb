@@ -13,7 +13,7 @@ describe Semantics::ContentProject do
     subject { content_project }
 
     describe 'the found content project' do
-      its('name') { is_expected.to include "TEST_PROJECT" }
+      its('name') { is_expected.to include 'TEST_PROJECT' }
       its('id') { is_expected.to eq cp_id }
       its('engine_configuration') { is_expected.to eq engine_configuration }
       its('count_things') { is_expected.to be > 0 }
@@ -24,8 +24,8 @@ describe Semantics::ContentProject do
     it 'returns the right attributes' do
       VCR.use_cassette('get_content_project') do
         content_project = Semantics::ContentProject.find(cp_id)
-        expect(content_project.id).to eq (cp_id)
-        expect(content_project.name).to eq ("TEST_PROJECT")
+        expect(content_project.id).to eq cp_id
+        expect(content_project.name).to eq 'TEST_PROJECT'
       end
     end
   end
@@ -33,7 +33,8 @@ describe Semantics::ContentProject do
   describe '#create' do
     it 'creates a new content_project' do
       VCR.use_cassette('create_content_project') do
-        content_project = Semantics::ContentProject.create('NEW_CP', engine_configuration)
+        content_project = Semantics::ContentProject
+                          .create('NEW_CP', engine_configuration)
         expect(content_project.name).to eq('NEW_CP')
       end
     end

@@ -5,22 +5,23 @@ module Semantics
     base_uri BASE_URI
 
     attr_reader :id, :generated_text, :status, :created, :modified, :uid,
-      :description, :name, :url, :text_as_html, :pure_data, :content_project, :name
+                :description, :name, :url, :text_as_html, :pure_data,
+                :content_project, :name
 
     def initialize(attributes)
-      @id = attributes["id"]
-      @generated_text = attributes["generated_text"]
-      @status = attributes["status"]
-      @created = attributes["created"]
-      @modified = attributes["modified"]
-      @uid = attributes["uid"]
-      @description = attributes["description"]
-      @name = attributes["name"]
-      @url = attributes["url"]
-      @text_as_html = attributes["text_as_html"]
-      @pure_data = attributes["pure_data"]
-      @content_project = attributes["content_project"]
-      @name = attributes["name"]
+      @id = attributes['id']
+      @generated_text = attributes['generated_text']
+      @status = attributes['status']
+      @created = attributes['created']
+      @modified = attributes['modified']
+      @uid = attributes['uid']
+      @description = attributes['description']
+      @name = attributes['name']
+      @url = attributes['url']
+      @text_as_html = attributes['text_as_html']
+      @pure_data = attributes['pure_data']
+      @content_project = attributes['content_project']
+      @name = attributes['name']
     end
 
     def self.find(cp_id, obj_id)
@@ -68,8 +69,8 @@ module Semantics
 
     def self.headers
       {
-        "Content-Type" => "application/json",
-        "Authorization" => TOKEN
+        'Content-Type' => 'application/json',
+        'Authorization' => TOKEN
       }
     end
   end

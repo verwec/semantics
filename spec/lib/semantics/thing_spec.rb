@@ -4,8 +4,7 @@ describe Semantics::Thing do
   let(:cp_id) { 4748 }
 
   describe '#find' do
-
-    let(:obj_id) { 93685 }
+    let(:obj_id) { 93_685 }
     let(:thing) do
       VCR.use_cassette('get_thing') do
         Semantics::Thing.find(cp_id, obj_id)
@@ -14,12 +13,12 @@ describe Semantics::Thing do
     subject { thing }
 
     describe 'the found thing' do
-      its('status') { is_expected.to eq "not requested" }
+      its('status') { is_expected.to eq 'not requested' }
       its('created') { is_expected.to be }
       its('modified') { is_expected.to be }
       its('uid') { is_expected.to be }
       its('name') { is_expected.to eq 'foobar' }
-      its('pure_data') { is_expected.to eq({"key"=>"value"}) }
+      its('pure_data') { is_expected.to eq('key' => 'value') }
       its('content_project') { is_expected.to eq cp_id }
     end
   end
@@ -43,7 +42,7 @@ describe Semantics::Thing do
         uid = 214
         name = 'foobar'
         pure_date = { name: 'Bob' }
-        obj_id = 28653
+        obj_id = 28_653
         thing = Semantics::Thing.update(cp_id, obj_id, uid, name, pure_date)
         expect(thing.name).to eq('foobar')
       end

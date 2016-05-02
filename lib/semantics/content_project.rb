@@ -4,17 +4,17 @@ module Semantics
 
     base_uri BASE_URI
 
-    attr_reader :id, :name, :axcompany_name, :engine_configuration, :count_things,
-      :count_generated_texts, :thing_type
+    attr_reader :id, :name, :axcompany_name, :engine_configuration,
+                :count_things, :count_generated_texts, :thing_type
 
     def initialize(attributes)
-      @id = attributes["id"]
-      @name = attributes["name"]
-      @axcompany_name = attributes["axcompany_name"]
-      @engine_configuration = attributes["engine_configuration"]
-      @count_things = attributes["count_things"]
-      @count_generated_texts = attributes["count_generated_texts"]
-      @thing_type = attributes["thing_type"]
+      @id = attributes['id']
+      @name = attributes['name']
+      @axcompany_name = attributes['axcompany_name']
+      @engine_configuration = attributes['engine_configuration']
+      @count_things = attributes['count_things']
+      @count_generated_texts = attributes['count_generated_texts']
+      @thing_type = attributes['thing_type']
     end
 
     def self.find(cp_id)
@@ -25,7 +25,7 @@ module Semantics
     end
 
     def self.create(name, engine_configuration)
-      endpoint = "/content-project/"
+      endpoint = '/content-project/'
       options = {
         headers: headers,
         body: {
@@ -39,8 +39,8 @@ module Semantics
 
     def self.headers
       {
-        "Content-Type" => "application/json",
-        "Authorization" => TOKEN
+        'Content-Type' => 'application/json',
+        'Authorization' => TOKEN
       }
     end
   end
