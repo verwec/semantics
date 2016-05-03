@@ -4,24 +4,10 @@ module Semantics
 
     base_uri BASE_URI
 
-    attr_reader :id, :generated_text, :status, :created, :modified, :uid,
-                :description, :name, :url, :text_as_html, :pure_data,
-                :content_project, :name
+    attr_reader :data
 
-    def initialize(attributes)
-      @id = attributes['id']
-      @generated_text = attributes['generated_text']
-      @status = attributes['status']
-      @created = attributes['created']
-      @modified = attributes['modified']
-      @uid = attributes['uid']
-      @description = attributes['description']
-      @name = attributes['name']
-      @url = attributes['url']
-      @text_as_html = attributes['text_as_html']
-      @pure_data = attributes['pure_data']
-      @content_project = attributes['content_project']
-      @name = attributes['name']
+    def initialize(data)
+      @data = data
     end
 
     def self.find(cp_id, obj_id)
@@ -76,6 +62,10 @@ module Semantics
         'Content-Type' => 'application/json',
         'Authorization' => TOKEN
       }
+    end
+
+    def method_missing(method)
+      data[method.to_s]
     end
   end
 end

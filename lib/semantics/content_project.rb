@@ -4,17 +4,10 @@ module Semantics
 
     base_uri BASE_URI
 
-    attr_reader :id, :name, :axcompany_name, :engine_configuration,
-                :count_things, :count_generated_texts, :thing_type
+    attr_reader :data
 
-    def initialize(attributes)
-      @id = attributes['id']
-      @name = attributes['name']
-      @axcompany_name = attributes['axcompany_name']
-      @engine_configuration = attributes['engine_configuration']
-      @count_things = attributes['count_things']
-      @count_generated_texts = attributes['count_generated_texts']
-      @thing_type = attributes['thing_type']
+    def initialize(data)
+      @data = data
     end
 
     def self.find(cp_id)
@@ -35,7 +28,7 @@ module Semantics
         }.to_json
       }
       attributes = post(endpoint, options)
-      raise ApiError.new(attributes) unless attributes.response.code == '200'
+      raise ApiError.new(attributes) unless attributes.response.code == '201'
       new(attributes)
     end
 
@@ -44,6 +37,10 @@ module Semantics
         'Content-Type' => 'application/json',
         'Authorization' => TOKEN
       }
+    end
+
+    def method_missing(method)
+      data[method.to_s]
     end
   end
 end
