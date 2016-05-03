@@ -44,6 +44,7 @@ module Semantics
         }.to_json
       }
       attributes = post(endpoint, options)
+      raise ApiError.new(attributes) unless attributes.response.code == '201'
       new(attributes)
     end
 
