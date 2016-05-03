@@ -13,9 +13,9 @@ module Semantics
     def self.find(cp_id)
       endpoint = "/content-project/#{cp_id}/"
       options = { headers: headers }
-      attributes = get(endpoint, options)
-      raise ApiError.new(attributes) unless attributes.response.code == '200'
-      new(attributes)
+      data = get(endpoint, options)
+      raise ApiError.new(data) unless data.response.code == '200'
+      new(data)
     end
 
     def self.create(name, engine_configuration)
@@ -27,9 +27,9 @@ module Semantics
           engine_configuration: engine_configuration
         }.to_json
       }
-      attributes = post(endpoint, options)
-      raise ApiError.new(attributes) unless attributes.response.code == '201'
-      new(attributes)
+      data = post(endpoint, options)
+      raise ApiError.new(data) unless data.response.code == '201'
+      new(data)
     end
 
     def self.headers

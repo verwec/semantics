@@ -13,9 +13,9 @@ module Semantics
     def self.find(cp_id, obj_id)
       endpoint = "/content-project/#{cp_id}/thing/#{obj_id}/"
       options = { headers: headers }
-      attributes = get(endpoint, options)
-      raise ApiError.new(attributes) unless attributes.response.code == '200'
-      new(attributes)
+      data = get(endpoint, options)
+      raise ApiError.new(data) unless data.response.code == '200'
+      new(data)
     end
 
     def self.create(cp_id, uid, name, pure_data)
@@ -29,9 +29,9 @@ module Semantics
           pure_data: pure_data
         }.to_json
       }
-      attributes = post(endpoint, options)
-      raise ApiError.new(attributes) unless attributes.response.code == '201'
-      new(attributes)
+      data = post(endpoint, options)
+      raise ApiError.new(data) unless data.response.code == '201'
+      new(data)
     end
 
     def self.update(cp_id, obj_id, uid, name, pure_data)
@@ -45,15 +45,23 @@ module Semantics
           pure_data: pure_data
         }.to_json
       }
-      attributes = put(endpoint, options)
-      raise ApiError.new(attributes) unless attributes.response.code == '200'
-      new(attributes)
+      data = put(endpoint, options)
+      raise ApiError.new(data) unless data.response.code == '200'
+      new(data)
+    end
+
+    def self.generate_content(cp_id, obj_id)
+      endpoint = "/content-project/#{cp_id}/thing/#{obj_id}/generate_content/?force=true"
+      options = { headers: headers }
+
+      data = post(endpoint, options)
+      raise ApiError.new(data) unless data.response.code == '200'
+      data['status']
     end
 
     def self.destroy(cp_id, obj_id)
       endpoint = "/content-project/#{cp_id}/thing/#{obj_id}/"
       options = { headers: headers }
-      raise ApiError.new(attributes) unless attributes.response.code == '200'
       delete(endpoint, options)
     end
 

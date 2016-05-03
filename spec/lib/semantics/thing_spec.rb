@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Semantics::Thing do
   let(:cp_id) { 4748 }
+  let(:obj_id) { 93_685 }
 
   describe '#find' do
-    let(:obj_id) { 93_685 }
     let(:thing) do
       VCR.use_cassette('get_thing') do
         Semantics::Thing.find(cp_id, obj_id)
@@ -44,13 +44,20 @@ describe Semantics::Thing do
   describe '#update' do
     it 'updates a thing' do
       VCR.use_cassette('update_thing') do
-        cp_id = 4591
-        uid = 214
         name = 'foobar'
+        uid = 214
         pure_date = { name: 'Bob' }
-        obj_id = 28_653
         thing = Semantics::Thing.update(cp_id, obj_id, uid, name, pure_date)
-        expect(thing.name).to eq('foobar')
+        expect(thing.name).to eq(name)
+      end
+    end
+  end
+
+  describe '#generate_content' do
+    it 'generates content for a single object' do
+      VCR.use_cassette('generate_content') do
+        response = Semantics::Thing.generate_content(cp_id, obj_id)
+        expect(response).to eq 'NOT_CALLED'
       end
     end
   end
