@@ -62,7 +62,9 @@ module Semantics
     def self.destroy(cp_id, obj_id)
       endpoint = "/content-project/#{cp_id}/thing/#{obj_id}/"
       options = { headers: headers }
-      delete(endpoint, options)
+      data = delete(endpoint, options)
+      raise ApiError.new(data) unless data.response.code == '204'
+      true
     end
 
     def self.headers
