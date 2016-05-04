@@ -4,6 +4,14 @@ describe Semantics::Thing do
   let(:cp_id) { 4748 }
   let(:obj_id) { 93_685 }
 
+  describe '#all' do
+    it 'lists all things' do
+      VCR.use_cassette('all_content_projects') do
+        expect(Semantics::Thing.all(cp_id).count).to be > 0
+      end
+    end
+  end
+
   describe '#find' do
     let(:thing) do
       VCR.use_cassette('get_thing') do

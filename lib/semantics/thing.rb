@@ -18,6 +18,14 @@ module Semantics
       new(data)
     end
 
+    def self.all(cp_id)
+      endpoint = "/content-project/#{cp_id}/thing/"
+      options = { headers: headers }
+      data = get(endpoint, options)
+      raise ApiError.new(data) unless data.response.code == '200'
+      data['results'].map { |d| Thing.new(d) }
+    end
+
     def self.create(cp_id, uid, name, pure_data)
       endpoint = "/content-project/#{cp_id}/thing/"
       options = {

@@ -3,6 +3,16 @@ require 'spec_helper'
 describe Semantics::ContentProject do
   let(:engine_configuration) { 526 }
 
+  describe '#all' do
+    let(:cp_id) { 4748 }
+
+    it 'lists all content projects' do
+      VCR.use_cassette('all_content_project') do
+        expect(Semantics::ContentProject.all.count).to be > 0
+      end
+    end
+  end
+
   describe '#find' do
     let(:cp_id) { 4748 }
     let(:content_project) do

@@ -10,6 +10,14 @@ module Semantics
       @data = data
     end
 
+    def self.all
+      endpoint = "/content-project/"
+      options = { headers: headers }
+      data = get(endpoint, options)
+      raise ApiError.new(data) unless data.response.code == '200'
+      data['results'].map { |d| ContentProject.new(d) }
+    end
+
     def self.find(cp_id)
       endpoint = "/content-project/#{cp_id}/"
       options = { headers: headers }
