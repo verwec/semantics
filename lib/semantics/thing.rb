@@ -18,8 +18,8 @@ module Semantics
       new(data)
     end
 
-    def self.all(cp_id)
-      endpoint = "/content-project/#{cp_id}/thing/"
+    def self.all(cp_id=nil)
+      endpoint = "/allthings/?page_size=1000&content_project_pk=#{cp_id}"
       options = { headers: headers }
       data = get(endpoint, options)
       raise ApiError.new(data) unless data.response.code == '200'
