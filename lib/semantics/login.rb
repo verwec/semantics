@@ -5,17 +5,17 @@ module Semantics
     base_uri BASE_URI
 
     def self.get_token(user, password)
-      endpoint = "/rest-auth/login/"
+      endpoint = '/rest-auth/login/'
       options = {
         headers: headers,
         body: {
           email: user,
-          password: password,
+          password: password
         }.to_json
       }
 
       data = post(endpoint, options)
-      raise ApiError.new(data) unless data.response.code == '200'
+      raise(ApiError, data) unless data.response.code == '200'
       data['key']
     end
 

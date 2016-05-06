@@ -11,10 +11,10 @@ module Semantics
     end
 
     def self.all
-      endpoint = "/content-project/"
+      endpoint = '/content-project/'
       options = { headers: headers }
       data = get(endpoint, options)
-      raise ApiError.new(data) unless data.response.code == '200'
+      raise(ApiError, data) unless data.response.code == '200'
       data['results'].map { |d| ContentProject.new(d) }
     end
 
@@ -22,7 +22,7 @@ module Semantics
       endpoint = "/content-project/#{cp_id}/"
       options = { headers: headers }
       data = get(endpoint, options)
-      raise ApiError.new(data) unless data.response.code == '200'
+      raise(ApiError, data) unless data.response.code == '200'
       new(data)
     end
 
@@ -36,7 +36,7 @@ module Semantics
         }.to_json
       }
       data = post(endpoint, options)
-      raise ApiError.new(data) unless data.response.code == '201'
+      raise(ApiError, data) unless data.response.code == '201'
       new(data)
     end
 

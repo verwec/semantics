@@ -10,20 +10,20 @@ module Semantics
       @data = data
     end
 
+    def self.all(cp_id = nil)
+      endpoint = "/allthings/?page_size=1000&content_project_pk=#{cp_id}"
+      options = { headers: headers }
+      data = get(endpoint, options)
+      raise(ApiError, data) unless data.response.code == '200'
+      data['results'].map { |d| Thing.new(d) }
+    end
+
     def self.find(cp_id, obj_id)
       endpoint = "/content-project/#{cp_id}/thing/#{obj_id}/"
       options = { headers: headers }
       data = get(endpoint, options)
-      raise ApiError.new(data) unless data.response.code == '200'
+      raise(ApiError, data) unless data.response.code == '200'
       new(data)
-    end
-
-    def self.all(cp_id=nil)
-      endpoint = "/allthings/?page_size=1000&content_project_pk=#{cp_id}"
-      options = { headers: headers }
-      data = get(endpoint, options)
-      raise ApiError.new(data) unless data.response.code == '200'
-      data['results'].map { |d| Thing.new(d) }
     end
 
     def self.create(cp_id, uid, name, pure_data)
@@ -38,7 +38,7 @@ module Semantics
         }.to_json
       }
       data = post(endpoint, options)
-      raise ApiError.new(data) unless data.response.code == '201'
+      raise(ApiError, data) unless data.response.code == '201'
       new(data)
     end
 
@@ -54,16 +54,16 @@ module Semantics
         }.to_json
       }
       data = put(endpoint, options)
-      raise ApiError.new(data) unless data.response.code == '200'
+      raise(ApiError, data) unless data.response.code == '200'
       new(data)
     end
 
     def self.generate_content(cp_id, obj_id)
-      endpoint = "/content-project/#{cp_id}/thing/#{obj_id}/generate_content/?force=true"
+      endpoint = "/content-project/#{cp_id}/thing/"\
+        "#{obj_id}/generate_content/?force=true"
       options = { headers: headers }
-
       data = post(endpoint, options)
-      raise ApiError.new(data) unless data.response.code == '200'
+      raise(ApiError, data) unless data.response.code == '200'
       data['status']
     end
 
@@ -71,7 +71,7 @@ module Semantics
       endpoint = "/content-project/#{cp_id}/thing/#{obj_id}/"
       options = { headers: headers }
       data = delete(endpoint, options)
-      raise ApiError.new(data) unless data.response.code == '204'
+      raise(ApiError, data) unless data.response.code == '204'
       true
     end
 
