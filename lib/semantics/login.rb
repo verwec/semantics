@@ -1,8 +1,5 @@
 module Semantics
-  class Login
-    include HTTParty
-
-    base_uri BASE_URI
+  class Login < AxData
 
     def self.get_token(user, password)
       endpoint = '/rest-auth/login/'
@@ -14,7 +11,7 @@ module Semantics
       }
 
       data = post(endpoint, options)
-      raise(ApiError, data) unless data.response.code == '200'
+      raise(ApiError, data) unless data.response.code == STATUS_SUCCESS
       data['key']
     end
 

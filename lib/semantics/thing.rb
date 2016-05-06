@@ -1,20 +1,11 @@
 module Semantics
-  class Thing
-    include HTTParty
-
-    base_uri BASE_URI
-
-    attr_reader :data
-
-    def initialize(data)
-      @data = data
-    end
+  class Thing < AxData
 
     def self.all(cp_id = nil)
       endpoint = "/allthings/?page_size=1000&content_project_pk=#{cp_id}"
       options = { headers: headers }
       data = get(endpoint, options)
-      raise(ApiError, data) unless data.response.code == '200'
+      raise(ApiError, data) unless data.response.code == STATUS_SUCCESS
       data['results'].map { |d| Thing.new(d) }
     end
 
@@ -22,7 +13,7 @@ module Semantics
       endpoint = "/content-project/#{cp_id}/thing/#{obj_id}/"
       options = { headers: headers }
       data = get(endpoint, options)
-      raise(ApiError, data) unless data.response.code == '200'
+      raise(ApiError, data) unless data.response.code == STATUS_SUCCESS
       new(data)
     end
 
@@ -35,7 +26,7 @@ module Semantics
         }.to_json
       }
       data = post(endpoint, options)
-      raise(ApiError, data) unless data.response.code == '201'
+      raise(ApiError, data) unless data.response.code == STATUS_CREATED
       new(data)
     end
 
@@ -48,7 +39,7 @@ module Semantics
         }.to_json
       }
       data = put(endpoint, options)
-      raise(ApiError, data) unless data.response.code == '200'
+      raise(ApiError, data) unless data.response.code == STATUS_SUCCESS
       new(data)
     end
 
@@ -57,7 +48,7 @@ module Semantics
         "#{obj_id}/generate_content/?force=true"
       options = { headers: headers }
       data = post(endpoint, options)
-      raise(ApiError, data) unless data.response.code == '200'
+      raise(ApiError, data) unless data.response.code == STATUS_SUCCESS
       data['status']
     end
 
@@ -65,19 +56,8 @@ module Semantics
       endpoint = "/content-project/#{cp_id}/thing/#{obj_id}/"
       options = { headers: headers }
       data = delete(endpoint, options)
-      raise(ApiError, data) unless data.response.code == '204'
+      raise(ApiError, data) unless data.response.code == STATUS_DELETED
       true
-    end
-
-    def self.headers
-      {
-        'Content-Type' => 'application/json',
-        'Authorization' => TOKEN
-      }
-    end
-
-    def method_missing(method)
-      data[method.to_s]
     end
   end
 end

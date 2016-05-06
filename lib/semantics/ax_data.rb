@@ -1,0 +1,27 @@
+module Semantics
+  class AxData
+    include HTTParty
+    base_uri 'https://api.ax-semantics.com/v1'.freeze
+
+    STATUS_CREATED = '201'
+    STATUS_SUCCESS = '200'
+    STATUS_DELETED = '204'
+
+    attr_reader :data
+
+    def self.headers
+      {
+        'Content-Type' => 'application/json',
+        'Authorization' => TOKEN
+      }
+    end
+
+    def initialize(data)
+      @data = data
+    end
+
+    def method_missing(method)
+      data[method.to_s]
+    end
+  end
+end
