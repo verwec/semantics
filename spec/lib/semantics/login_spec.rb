@@ -5,9 +5,7 @@ describe Semantics::Login do
     it 'returns a token' do
       user = 'USER@EXAMPLE.COM'
       password = 'SECRET_PASSWORD'
-      VCR.use_cassette('get_token') do
-        expect(Semantics::Login.get_token(user, password)).to eq 'aa5d2e36668c11e5964038bc572ec103'
-      end
+      expect(Semantics::Login.get_token(user, password)).to eq '12345'
     end
   end
 end

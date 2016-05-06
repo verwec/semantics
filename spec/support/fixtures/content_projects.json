@@ -1,0 +1,20 @@
+{"count":1,
+  "next":"https://api.ax-semantics.com/v1/content-project/?page=2",
+  "previous":null,
+  "results":[
+    {
+      "id":1,
+      "name":"NEW_CP",
+      "keyword_deviation":"33.00",
+      "keyword_density":"3.00",
+      "max_length":null,
+      "engine_configuration":526,
+      "count_things":0,
+      "count_generated_texts":0,
+      "min_length":null,
+      "count_generated_texts_errors":0,
+      "finisher_webhook_url":null,
+      "thing_type":"jsonthing"
+      }
+  ]
+}
