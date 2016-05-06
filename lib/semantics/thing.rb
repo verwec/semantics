@@ -31,10 +31,7 @@ module Semantics
       options = {
         headers: headers,
         body: {
-          uid: uid,
-          name: name,
-          content_project: cp_id,
-          pure_data: pure_data
+          uid: uid, name: name, content_project: cp_id, pure_data: pure_data
         }.to_json
       }
       data = post(endpoint, options)
@@ -47,10 +44,7 @@ module Semantics
       options = {
         headers: headers,
         body: {
-          uid: uid,
-          name: name,
-          content_project: cp_id,
-          pure_data: pure_data
+          uid: uid, name: name, content_project: cp_id, pure_data: pure_data
         }.to_json
       }
       data = put(endpoint, options)

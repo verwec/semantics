@@ -9,8 +9,7 @@ module Semantics
       options = {
         headers: headers,
         body: {
-          email: user,
-          password: password
+          email: user, password: password
         }.to_json
       }
 

@@ -31,8 +31,7 @@ module Semantics
       options = {
         headers: headers,
         body: {
-          name: name,
-          engine_configuration: engine_configuration
+          name: name, engine_configuration: engine_configuration
         }.to_json
       }
       data = post(endpoint, options)

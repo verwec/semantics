@@ -9,3 +9,4 @@
 /tmp/
 /spec/vcr/*
 .env
+.rubocop.yml
