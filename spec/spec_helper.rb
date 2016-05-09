@@ -10,8 +10,12 @@ WebMock.disable_net_connect!(allow_localhost: true)
 Semantics::TOKEN = 'Token 1234'.freeze
 
 RSpec.configure do |config|
+
   config.before(:each) do
+
+    # login
     stub_request(:post, 'https://api.ax-semantics.com/v1/rest-auth/login/')
+      .with(headers: login_headers, body: login_body)
       .to_rack(FakeAxSemantics)
 
     # content projects
@@ -54,6 +58,13 @@ RSpec.configure do |config|
 
   private
 
+  def login_body
+    {
+      email: 'USER@EXAMPLE.COM',
+      password: 'SECRET_PASSWORD'
+    }
+  end
+
   def thing_put_body
     {
       uid: 1,
@@ -76,6 +87,12 @@ RSpec.configure do |config|
     {
       name: 'NEW_CP',
       engine_configuration: '123'
+    }
+  end
+
+  def login_headers
+    {
+      'Content-Type' => 'application/json'
     }
   end
 
