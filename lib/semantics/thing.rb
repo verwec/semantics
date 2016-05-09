@@ -2,7 +2,7 @@ module Semantics
   class Thing < AxData
 
     def self.all(cp_id = nil)
-      endpoint = "/allthings/?page_size=1000&content_project_pk=#{cp_id}"
+      endpoint = "/allthings/?page_size=100000&content_project_pk=#{cp_id}"
       options = { headers: headers }
       data = get(endpoint, options)
       raise(ApiError, data) unless data.response.code == STATUS_SUCCESS
