@@ -1,4 +1,10 @@
 require 'dotenv'
 require 'httparty'
 
-Dir[File.dirname(__FILE__) + '/semantics/*.rb'].each { |f| require f }
+require_relative 'semantics/api_error'
+require_relative 'semantics/api_misssing_token_error'
+require_relative 'semantics/ax_data'
+require_relative 'semantics/configuration'
+require_relative 'semantics/content_project'
+require_relative 'semantics/login'
+require_relative 'semantics/thing'
