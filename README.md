@@ -19,36 +19,44 @@ Create a .env file containing your API TOKEN
 
 ``` TOKEN <YOUR API TOKEN>```
 
-## Usage
+## Getting Started
+
 
 ### Content Projects
 
-Create a new content project
+Create a new Content Project:
 
 ``` Semantics::ContentProject.create(name_of_the_project, engine_configuration) ```
 
-Find a content project
+Find a Content Project:
 
 ``` Semantics::ContentProject.find(content_project_id) ```
 
 ### Objects (Things)
 
-Create a new thing
+Create an Object:
 
 ``` Semantics::Thing.create(content_project_id, uid, name, pure_date) ```
 
-Find a thing
+Display all Objects from different Content Projects:
+
+```  Semantics::Thing.all ``` 
+
+Display Objects from a specific Content Project:
+
+```  Semantics::Thing.all(content_project_id) ``` 
+
+Find an Object:
 
 ```  Semantics::Thing.find(content_project_id, uid) ``` 
 
-Update a thing
+Update an Object:
 
-``` Semantics::Thing.update(content_project_id, object_id, uid, name, pure_date) ``` 
+``` thing.update(uid, name, pure_date) ``` 
 
-Delete a thing 
+Destroy an Object 
 
-``` Semantics::Thing.destroy(content_project_id, object_id) ```
-
+``` thing.destroy ```
 
 
 ## Development
