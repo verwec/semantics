@@ -48,7 +48,7 @@ Display Objects from a specific Content Project:
 
 Find an Object:
 
-```  Semantics::Thing.find(content_project_id, uid) ``` 
+```  Semantics::Thing.find(content_project_id, object_id) ``` 
 
 Update an Object:
 
