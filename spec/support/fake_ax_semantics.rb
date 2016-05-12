@@ -37,7 +37,7 @@ class FakeAxSemantics < Sinatra::Base
   end
 
   put '/v1/content-project/123/thing/1/' do
-    json_response 200, 'thing.json'
+    json_response 200, 'updated_thing.json'
   end
 
   post '/v1/content-project/123/thing/1/generate_content/' do

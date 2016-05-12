@@ -32,7 +32,7 @@ RSpec.configure do |config|
       .to_rack(FakeAxSemantics)
 
     # things
-    stub_request(:get, 'https://api.ax-semantics.com/v1/allthings/?content_project_pk=123&page_size=1000')
+    stub_request(:get, 'https://api.ax-semantics.com/v1/allthings/?content_project_pk=123&page_size=100000')
       .with(headers: headers)
       .to_rack(FakeAxSemantics)
 
@@ -67,10 +67,10 @@ RSpec.configure do |config|
 
   def thing_put_body
     {
-      uid: 1,
-      name: 'foobar',
+      uid: 99,
+      name: 'BobDoe',
       content_project: 123,
-      pure_data: { name: 'Bob' }
+      pure_data: { name: 'Bob Doe' }
     }
   end
 

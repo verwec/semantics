@@ -59,5 +59,13 @@ module Semantics
       raise(ApiError, data) unless data.response.code == STATUS_DELETED
       true
     end
+
+    def update(uid, name, pure_data)
+      self.class.update(content_project, id, uid, name, pure_data)
+    end
+
+    def destroy
+      self.class.destroy(content_project, id)
+    end
   end
 end

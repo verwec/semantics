@@ -35,20 +35,32 @@ describe Semantics::Thing do
   describe '.create' do
     it 'creates a thing' do
       uid = 1
-      pure_date = { key: 'value' }
+      pure_data = { key: 'value' }
       name =  'foobar'
-      thing = Semantics::Thing.create(cp_id, uid, name, pure_date)
+      thing = Semantics::Thing.create(cp_id, uid, name, pure_data)
       expect(thing).to be_kind_of(Semantics::Thing)
     end
   end
 
-  describe '.update' do
-    it 'updates a thing' do
-      name = 'foobar'
-      pure_date = { name: 'Bob' }
-      uid = 1
-      thing = Semantics::Thing.update(cp_id, obj_id, uid, name, pure_date)
-      expect(thing).to be_kind_of(Semantics::Thing)
+  context "Update methods" do
+
+    let(:name) { 'BobDoe' }
+    let(:pure_data) { { 'name' => 'Bob Doe' } }
+    let(:uid) { 99 }
+
+    describe '#update' do
+      it 'updates a thing' do
+        thing = Semantics::Thing.find(cp_id, obj_id)
+        updated_thing = thing.update(uid, name, pure_data)
+        expect(updated_thing).to be_kind_of(Semantics::Thing)
+      end
+    end
+
+    describe '.update' do
+      it 'updates a thing' do
+        updated_thing = Semantics::Thing.update(cp_id, obj_id, uid, name, pure_data)
+        expect(updated_thing).to be_kind_of(Semantics::Thing)
+      end
     end
   end
 
