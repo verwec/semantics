@@ -58,6 +58,20 @@ Destroy an Object
 
 ``` thing.destroy ```
 
+## Example workflow
+
+
+``` 
+# creating a new Content Project with engine configuration 526
+
+content_project = Semantics::ContentProject.create('New Project', 526)
+
+# create a new Object in this Content Project
+thing = Semantics::Thing.create(content_project.id, "MyId", "FancyThing", { 'key' => 'value' })
+
+# trigger content generation
+thing.generate
+``` 
 
 ## Development
 
