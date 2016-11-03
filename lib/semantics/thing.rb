@@ -48,7 +48,7 @@ module Semantics
         "#{obj_id}/generate_content/?force=true"
       options = { headers: headers }
       data = post(endpoint, options)
-      raise(ApiError, data) unless data.response.code == STATUS_SUCCESS
+      raise(ApiError, data) unless data.response.code == STATUS_ACCEPTED
       data['status']
     end
 

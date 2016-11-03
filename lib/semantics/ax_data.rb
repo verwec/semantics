@@ -3,9 +3,10 @@ module Semantics
     include HTTParty
     base_uri 'https://api.ax-semantics.com/v1'.freeze
 
-    STATUS_CREATED = '201'
-    STATUS_SUCCESS = '200'
-    STATUS_DELETED = '204'
+    STATUS_SUCCESS  = '200'
+    STATUS_CREATED  = '201'
+    STATUS_ACCEPTED = '202'
+    STATUS_DELETED  = '204'
 
     attr_reader :data
 
