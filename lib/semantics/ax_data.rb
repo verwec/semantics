@@ -13,7 +13,7 @@ module Semantics
     def self.headers
       {
         'Content-Type' => 'application/json',
-        'Authorization' => TOKEN
+        'Authorization' => Semantics.configuration.api_token
       }
     end
 
