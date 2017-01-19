@@ -13,11 +13,15 @@ And then execute:
 Or install it yourself as:
 
     $ gem install semantics
-    
-    
-Create a .env file containing your API TOKEN
 
-``` TOKEN <YOUR API TOKEN>```
+
+Set the API token using this simple code:
+
+```ruby
+  Semantics.configure do |config|
+    config.api_token = 'YOUR_API_TOKEN'
+  end
+```
 
 ## Getting Started
 
@@ -40,28 +44,28 @@ Create an Object:
 
 Display all Objects from different Content Projects:
 
-```  Semantics::Thing.all ``` 
+```  Semantics::Thing.all ```
 
 Display Objects from a specific Content Project:
 
-```  Semantics::Thing.all(content_project_id) ``` 
+```  Semantics::Thing.all(content_project_id) ```
 
 Find an Object:
 
-```  Semantics::Thing.find(content_project_id, object_id) ``` 
+```  Semantics::Thing.find(content_project_id, object_id) ```
 
 Update an Object:
 
-``` thing.update(uid, name, pure_date) ``` 
+``` thing.update(uid, name, pure_date) ```
 
-Destroy an Object 
+Destroy an Object
 
 ``` thing.destroy ```
 
 ## Example workflow
 
 
-``` 
+```
 # creating a new Content Project with engine configuration 526
 
 content_project = Semantics::ContentProject.create('New Project', 526)
@@ -71,7 +75,7 @@ thing = Semantics::Thing.create(content_project.id, "MyId", "FancyThing", { 'key
 
 # trigger content generation
 thing.generate
-``` 
+```
 
 ## Development
 
@@ -87,4 +91,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
